@@ -96,7 +96,7 @@ func (c *callbacks) after(scope *gorm.Scope, operation string) {
 		return
 	}
 	txn, _ := scope.Get(txnGormKey)
-	scope.Set(startTimeKey, newrelic.StartSegmentNow(txn.(newrelic.Transaction)))
+	scope.Set(startTimeKey, newrelic.StartSegmentNow(txn.(*newrelic.Transaction)))
 }
 
 func (c *callbacks) commitOrRollback(scope *gorm.Scope) {
