@@ -2,19 +2,19 @@ package nrredis
 
 import (
 	"os"
-	"strings"
 	"testing"
 
+	"github.com/filipemendespi/newrelic-context/nrmock"
 	"github.com/newrelic/go-agent/v3/newrelic"
 
 	"github.com/alicebob/miniredis"
-	"github.com/filipemendespi/newrelic-context/nrmock"
 	"gopkg.in/redis.v5"
 )
 
 var client *redis.Client
 var testTxn *newrelic.Transaction
 var lastSegment *nrmock.DatastoreSegment
+var sampleLicense = "0123456789012345678901234567890123456789"
 
 func TestMain(m *testing.M) {
 	// in-memory redis
@@ -37,8 +37,8 @@ func TestMain(m *testing.M) {
 	}
 
 	app, _ := newrelic.NewApplication(
-		newrelic.ConfigAppName("test"),
-		newrelic.ConfigLicense(strings.Repeat("a", 40)),
+		newrelic.ConfigAppName("My app"),
+		newrelic.ConfigLicense(sampleLicense),
 	)
 	testTxn = app.StartTransaction("txn-name")
 
