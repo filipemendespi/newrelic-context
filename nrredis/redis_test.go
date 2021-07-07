@@ -4,7 +4,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/filipemendespi/newrelic-context/nrmock"
+	"github.com/getndazn/newrelic-context/nrmock"
 	"github.com/newrelic/go-agent/v3/newrelic"
 
 	"github.com/alicebob/miniredis"

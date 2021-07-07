@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 
-	nrcontext "github.com/filipemendespi/newrelic-context"
+	nrcontext "github.com/getndazn/newrelic-context"
 )
 
 func indexHandlerFunc(rw http.ResponseWriter, req *http.Request) {

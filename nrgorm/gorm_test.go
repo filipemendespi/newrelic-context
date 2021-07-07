@@ -1,12 +1,13 @@
 package nrgorm
 
 import (
+	"gorm.io/driver/sqlite"
 	"os"
 	"testing"
 
-	"github.com/filipemendespi/newrelic-context/nrmock"
-	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/sqlite"
+	"github.com/getndazn/newrelic-context/nrmock"
+	"gorm.io/gorm"
+
 	"github.com/newrelic/go-agent/v3/newrelic"
 )
 
@@ -24,13 +25,12 @@ func TestMain(m *testing.M) {
 	var err error
 	// prepare db
 	os.Remove("./foo.db")
-	db, err = gorm.Open("sqlite3", "./foo.db")
+	db, err := gorm.Open(sqlite.Open("./foo.db"))
 	if err != nil {
-		panic(err)
+		panic("failed to connect database")
 	}
-	defer db.Close()
 
-	if err := db.CreateTable(&Model{}).Error; err != nil {
+	if err := db.Migrator().CreateTable(&Model{}).Error; err != nil {
 		panic(err)
 	}
 	if err := db.Create(&Model{Value: "to-select"}).Error; err != nil {

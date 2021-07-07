@@ -7,7 +7,7 @@ import (
 	"log"
 	"net/http"
 
-	nrcontext "github.com/filipemendespi/newrelic-context"
+	nrcontext "github.com/getndazn/newrelic-context"
 )
 
 func Consume(ctx context.Context, query string) {

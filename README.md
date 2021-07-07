@@ -1,10 +1,10 @@
 # newrelic-context
 
-Contains different helpers to make life easier with NewRelic and Context.
+Contains different helpers to make life easier with NewRelic agent v3 and Gorm v2.
 
 ## Installation
 
-`go get github.com/filipemendespi/newrelic-context`
+`go get github.com/getndazn/newrelic-context`
 
 ## In this package:
 
@@ -17,7 +17,7 @@ Contains different helpers to make life easier with NewRelic and Context.
 * `RedisWrapper` - Logs gopkg.in/redis.v5 time in newrelic
 * `WrapRedisClient` - Returns copy of redis client with newrelic for transaction
 
-API documentation is available on [godoc.org](https://godoc.org/github.com/filipemendespi/newrelic-context)
+API documentation is available on [godoc.org](https://godoc.org/github.com/getndazn/newrelic-context)
 
 ## Examples:
 
@@ -27,7 +27,7 @@ Use NewRelicMiddleware:
 package main
 
 import (
-    "github.com/filipemendespi/newrelic-context"
+    "github.com/getndazn/newrelic-context"
     "log"
     "net/http"
 )
@@ -73,9 +73,9 @@ Use with Gorm:
 var db *gorm.DB
 
 func initDB() *gorm.DB {
-    db, err := gorm.Open("sqlite3", "./foo.db")
+    db, err := gorm.Open(sqlite.Open("./foo.db"))
     if err != nil {
-        panic(err)
+        panic("failed to connect database")
     }
     nrgorm.AddGormCallbacks(db)
     return db

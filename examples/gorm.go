@@ -4,18 +4,18 @@ import (
 	"fmt"
 	"net/http"
 
-	nrcontext "github.com/filipemendespi/newrelic-context"
-	"github.com/filipemendespi/newrelic-context/nrgorm"
-	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/sqlite"
+	nrcontext "github.com/getndazn/newrelic-context"
+	"github.com/getndazn/newrelic-context/nrgorm"
+	"gorm.io/driver/sqlite"
+	"gorm.io/gorm"
 )
 
 var db *gorm.DB
 
 func initDB() *gorm.DB {
-	db, err := gorm.Open("sqlite3", "./foo.db")
+	db, err := gorm.Open(sqlite.Open("./foo.db"))
 	if err != nil {
-		panic(err)
+		panic("failed to connect database")
 	}
 	nrgorm.AddGormCallbacks(db)
 	return db
@@ -39,8 +39,6 @@ func catalogPage(db *gorm.DB) http.Handler {
 
 func other_main() {
 	db = initDB()
-	defer db.Close()
-
 	handler := catalogPage(db)
 	nrmiddleware, _ := nrcontext.NewMiddleware("test-app", "my-license-key")
 	handler = nrmiddleware.Handler(handler)

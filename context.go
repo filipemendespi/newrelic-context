@@ -5,9 +5,10 @@ import (
 
 	"github.com/newrelic/go-agent/v3/newrelic"
 
-	"github.com/filipemendespi/newrelic-context/nrgorm"
-	"github.com/filipemendespi/newrelic-context/nrredis"
-	"github.com/jinzhu/gorm"
+	"github.com/getndazn/newrelic-context/nrgorm"
+	"github.com/getndazn/newrelic-context/nrredis"
+	"gorm.io/gorm"
+
 	redis "gopkg.in/redis.v5"
 )
 
