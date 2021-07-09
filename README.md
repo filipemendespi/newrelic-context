@@ -1,6 +1,15 @@
 # newrelic-context
 
-Contains different helpers to make life easier with NewRelic agent v3 and Gorm v2.
+Contains different helpers to integrate [NewRelic agent v3](https://github.com/newrelic/go-agent/tree/master/v3)
+with [Gorm v2](https://github.com/go-gorm/gorm).
+
+## When to use this?
+
+This is a workaround to [an issue](https://discuss.newrelic.com/t/go-datastore-segments-nrpq-not-working-when-transactions-in-general-are-working-fine/152573/3)
+where the [postgres integration](https://github.com/newrelic/go-agent/tree/master/v3/integrations/nrpq) doesn't display database NR metrics as expected.
+
+If using another type of database, MySQL for example, you might have a [simpler option](https://github.com/newrelic/go-agent/issues/242#issuecomment-875706669)
+as other drivers work just fine.
 
 ## Installation
 
